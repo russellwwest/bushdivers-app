@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\DB;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
@@ -41,4 +42,33 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function getPilotIdAttribute()
+    {
+        $number = str_pad($this->id, 4, "0", STR_PAD_LEFT);
+        return 'BDV'.$number;
+    }
+
+    public function getRank()
+    {
+        return Rank::find($this->rank_id);
+
+    }
+
+    public function getBalanceAttribute()
+    {
+        return DB::table('user_accounts')
+            ->where('user_id', $this->id)
+            ->sum('total');
+    }
+
+    public function rank()
+    {
+        return $this->belongsTo(Rank::class);
+    }
+
+    public function accounts()
+    {
+        return $this->hasMany(UserAcount::class);
+    }
 }
