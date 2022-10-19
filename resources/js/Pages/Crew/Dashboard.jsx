@@ -4,11 +4,11 @@ import AppLayout from '../../Components/Layout/AppLayout'
 const Dashboard = () => {
   return (
     <div>
-      Dashboard
+      Test
     </div>
   )
 }
 
-Dashboard.layout = page => <AppLayout children={page} title="Crew Page" />
+Dashboard.layout = page => <AppLayout children={page} heading="My Crew Page" title="Crew Page" />
 
 export default Dashboard
