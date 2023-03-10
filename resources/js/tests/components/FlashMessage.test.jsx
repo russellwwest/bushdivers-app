@@ -1,6 +1,6 @@
 import React from 'react'
 import { render, screen } from '@testing-library/react'
-import { FlashMessage } from './FlashMessage'
+import { FlashMessage } from '../../components/general/FlashMessage'
 
 describe('FlashMessage component', function () {
   it('renders a message', function () {

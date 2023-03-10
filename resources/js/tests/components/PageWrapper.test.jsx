@@ -1,6 +1,6 @@
 import React from 'react'
 import { render, screen } from '@testing-library/react'
-import { PageWrapper } from './PageWrapper'
+import { PageWrapper } from '../../components/layout/PageWrapper'
 
 describe('PageWrapper component', function () {
   it('renders a child', function () {

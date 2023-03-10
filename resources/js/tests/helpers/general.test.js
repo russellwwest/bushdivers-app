@@ -1,4 +1,4 @@
-import { capitalize, displayCash } from './general.helper'
+import { capitalize, displayCash } from '../../helpers/general.helper'
 
 describe('General helpers', () => {
   it('Capitalizes a string', () => {
