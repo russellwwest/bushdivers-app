@@ -25,4 +25,7 @@ Route::post('/register', [\App\Http\Controllers\AuthController::class, 'register
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [\App\Http\Controllers\CrewController::class, 'index']);
     Route::get('/logout', [\App\Http\Controllers\AuthController::class, 'logout']);
+
+    Route::get('/jumpseat', [\App\Http\Controllers\JumpseatController::class, 'index']);
+    Route::post('/jumpseat', [\App\Http\Controllers\JumpseatController::class, 'performJumpseat']);
 });

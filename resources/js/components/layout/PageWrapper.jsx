@@ -9,8 +9,8 @@ export const PageWrapper = ({
     <>
       {!isFullSize
         ? (
-          <Box px={12} py={4}>
-            <Box mt={4}>{children}</Box>
+          <Box mx={{ sm: 4, lg: 36 }} mt={4} mb={2}>
+              {children}
           </Box>
           )
         : (
