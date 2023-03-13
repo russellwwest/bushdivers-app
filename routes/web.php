@@ -28,4 +28,6 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/jumpseat', [\App\Http\Controllers\JumpseatController::class, 'index']);
     Route::post('/jumpseat', [\App\Http\Controllers\JumpseatController::class, 'performJumpseat']);
+
+    Route::get('/airport/{icao?}', [\App\Http\Controllers\ContractController::class, 'index']);
 });

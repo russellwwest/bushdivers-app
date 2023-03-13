@@ -14,7 +14,7 @@ import React, { useEffect, useState } from 'react'
 import { StatCard } from '../../components/general/StatCard'
 import AppLayout from '../../components/layout/AppLayout'
 import { HeadingSection } from '../../components/layout/HeadingSection'
-import { displayCash } from '../../helpers/general.helper'
+import { displayNumber } from '../../helpers/general.helper'
 
 const Jumpseat = ({ user, spent }) => {
   const [search, setSearch] = useState('')
@@ -75,7 +75,7 @@ const Jumpseat = ({ user, spent }) => {
                 <Heading size='md'>Calculate Jumpseat</Heading>
                 <Flex gap={2}>
                   <Input value={search} onChange={handleSearchChange} placeholder='Enter icao' />
-                  <Button onClick={() => getDestination()} isLoading={isLoading}>Check</Button>
+                  <Button colorScheme="gray" onClick={() => getDestination()} isLoading={isLoading}>Check</Button>
                 </Flex>
               </Flex>
             </CardHeader>
@@ -91,8 +91,8 @@ const Jumpseat = ({ user, spent }) => {
                 <Box textAlign="center">
                   <Flex direction="column" alignItems="center" gap={2}>
                     {airport && <Text fontSize="lg">Travel Details</Text>}
-                    <Skeleton h={4} mb={2} isLoaded={!isLoading}>{airport && <Heading size="lg">${cost}</Heading>}</Skeleton>
-                    <Skeleton h={4} isLoaded={!isLoading}>{airport && <Text fontSize="xl">{distance} nm</Text>}</Skeleton>
+                    <Skeleton h={4} mb={2} isLoaded={!isLoading}>{airport && <Heading size="lg">${displayNumber(cost)}</Heading>}</Skeleton>
+                    <Skeleton h={4} isLoaded={!isLoading}>{airport && <Text fontSize="xl">{displayNumber(distance)} nm</Text>}</Skeleton>
                   </Flex>
                 </Box>
                 <Box textAlign="center">
@@ -107,19 +107,19 @@ const Jumpseat = ({ user, spent }) => {
             </CardBody>
           </Card>
           <Flex mt={2} justifyContent="end">
-            <Button onClick={() => processJumpseat()} isDisabled={!airport} colorScheme="orange">Process Jumpseat</Button>
+            <Button onClick={() => processJumpseat()} isDisabled={!airport}>Process Jumpseat</Button>
           </Flex>
         </GridItem>
         <GridItem colSpan={{ sm: 3, lg: 1 }}>
           <StatCard
             title="Total Spent on Travel"
-            value={`$${displayCash(spent)}`}
+            value={`$${displayNumber(spent)}`}
           />
         </GridItem>
         <GridItem colSpan={{ sm: 3, lg: 1 }}>
           <StatCard
             title="Current Cash"
-            value={`$${displayCash(user.cash)}`}
+            value={`$${displayNumber(user.cash)}`}
           />
         </GridItem>
       </Grid>

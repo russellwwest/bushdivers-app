@@ -4,7 +4,7 @@ import { createRoot } from 'react-dom/client'
 import { ChakraProvider } from '@chakra-ui/react'
 import '@fontsource/montserrat/400.css'
 import '@fontsource/open-sans/700.css'
-
+import 'maplibre-gl/dist/maplibre-gl.css'
 import { theme } from './theme'
 
 createInertiaApp({

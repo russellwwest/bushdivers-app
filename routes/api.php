@@ -15,3 +15,4 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/jumpseat/check/{start}/{end}', [\App\Http\Controllers\JumpseatController::class, 'check']);
+Route::get('/metar/{icao}', [\App\Http\Controllers\AirportController::class, 'metar']);

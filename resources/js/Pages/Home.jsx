@@ -69,10 +69,10 @@ const Home = ({ stats }) => {
           <Box>
             <Flex alignItems="center" gap={4}>
               <Link href="/login">
-                <Button>Crew Login</Button>
+                <Button colorScheme="gray">Crew Login</Button>
               </Link>
               <Link href="/register">
-                <Button colorScheme="orange">Get Started</Button>
+                <Button>Get Started</Button>
               </Link>
             </Flex>
           </Box>

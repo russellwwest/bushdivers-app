@@ -17,7 +17,7 @@ import {
 } from '@chakra-ui/react'
 import { FaMoon, FaSun } from 'react-icons/fa'
 import { Link, usePage } from '@inertiajs/react'
-import { displayCash } from '../../helpers/general.helper'
+import { displayNumber } from '../../helpers/general.helper'
 
 export const Profile = () => {
   const { colorMode, toggleColorMode } = useColorMode()
@@ -32,11 +32,11 @@ export const Profile = () => {
             display={{ base: 'none', md: 'flex' }}
             alignItems="center"
           >
-            <Button variant="ghost" onClick={toggleColorMode}>
+            <Button colorScheme="gray" variant="ghost" onClick={toggleColorMode}>
               <Icon as={colorMode === 'light' ? FaMoon : FaSun} />
             </Button>
-            <Box color="orange.500"><Link href={`/airports/${auth.user?.current_airport_id}`}>{auth.user?.current_airport_id}</Link></Box>
-            <Box>${displayCash(auth.user?.cash)}</Box>
+            <Box color="orange.500"><Link href={`/airport/${auth.user?.current_airport_id}`}>{auth.user?.current_airport_id}</Link></Box>
+            <Box>${displayNumber(auth.user?.cash)}</Box>
           </Flex>
         </Box>
         <Box ml={2}>
