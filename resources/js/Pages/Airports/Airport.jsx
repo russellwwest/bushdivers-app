@@ -4,7 +4,7 @@ import React from 'react'
 import { AirportContent } from '../../components/airport/AirportContent'
 import { AirportHeader } from '../../components/airport/AirportHeader'
 import AppLayout from '../../components/layout/AppLayout'
-import { Map, MapProvider, Marker, useMap } from 'react-map-gl'
+import { Map, MapProvider, Marker } from 'react-map-gl'
 import maplibregl from 'maplibre-gl'
 import { parseMapStyle, mapboxToken, transformRequest } from '../../helpers/general.helper'
 

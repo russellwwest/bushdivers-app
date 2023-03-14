@@ -21,7 +21,8 @@ class AirportFactory extends Factory
             'name' => 'Moro',
             'size' => 3,
             'lat' => -6.36188,
-            'lon' => 143.23070
+            'lon' => 143.23070,
+            'magnetic_variance' => 5.33706
         ];
     }
 }
