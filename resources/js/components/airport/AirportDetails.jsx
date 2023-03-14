@@ -5,7 +5,6 @@ import {
   AccordionIcon,
   AccordionItem, AccordionPanel,
   Box,
-  Container,
   Flex,
   Heading, Icon, SimpleGrid,
   Text, useToast
@@ -70,7 +69,7 @@ export const AirportDetails = ({ airport }) => {
   }, [airport])
 
   return (
-    <Container>
+    <Box p={4}>
       <SimpleGrid columns={3} gap={2}>
         <Flex direction="column">
           <Heading size="md">{airport.name}</Heading>
@@ -151,7 +150,7 @@ export const AirportDetails = ({ airport }) => {
           </AccordionPanel>
         </AccordionItem>
       </Accordion>
-    </Container>
+    </Box>
   )
 }
 

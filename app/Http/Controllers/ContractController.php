@@ -41,7 +41,6 @@ class ContractController extends Controller
             }
 
             // get aircraft
-
             return Inertia::render('Airports/Airport', ['airport' => $airport, 'contracts' => $contracts]);
         } catch (ModelNotFoundException $e) {
             return redirect()->back()->with(['error' => 'Airport not found']);

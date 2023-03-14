@@ -1,12 +1,12 @@
-import { Card, Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react'
+import { Card, Tab, TabList, TabPanel, TabPanels, Tabs, Tag } from '@chakra-ui/react'
 import PropTypes from 'prop-types'
 import React from 'react'
 import { useMap } from 'react-map-gl'
 import { AircraftList } from './AircraftList'
 import { AirportDetails } from './AirportDetails'
-import { ContractList } from './ContractList'
+import { ContractList } from '../contracts/ContractList'
 
-export const AirportContent = ({ airport, updateView }) => {
+export const AirportContent = ({ airport, contracts, updateView }) => {
   const { airportMap } = useMap()
 
   function handleTabClick (zoom, whatClicked) {
@@ -18,14 +18,14 @@ export const AirportContent = ({ airport, updateView }) => {
     <Card>
     <Tabs>
       <TabList>
-        <Tab onClick={() => handleTabClick(7, 'contracts')}>Contracts</Tab>
+        <Tab onClick={() => handleTabClick(7, 'contracts')}>Contracts <Tag ml={2}>{contracts?.length}</Tag></Tab>
         <Tab onClick={() => handleTabClick(14, 'airport')} >Airport Info</Tab>
         <Tab onClick={() => handleTabClick(14, 'aircraft')}>Aircraft</Tab>
       </TabList>
 
       <TabPanels>
         <TabPanel>
-          <ContractList />
+          <ContractList contracts={contracts} />
         </TabPanel>
         <TabPanel>
           <AirportDetails airport={airport} />
@@ -41,5 +41,6 @@ export const AirportContent = ({ airport, updateView }) => {
 
 AirportContent.propTypes = {
   airport: PropTypes.object,
+  contracts: PropTypes.array,
   updateView: PropTypes.func
 }
