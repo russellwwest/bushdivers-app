@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Airport;
 use App\Models\Contract;
+use App\Services\Contracts\AcceptContract;
 use App\Services\Contracts\GetAirportsForContractGeneration;
 use App\Services\Contracts\GetNumberOfContractsToGenerate;
 use App\Services\Contracts\StartContractGenerationProcess;
 use App\Services\Contracts\StoreContracts;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
@@ -44,6 +46,17 @@ class ContractController extends Controller
             return Inertia::render('Airports/Airport', ['airport' => $airport, 'contracts' => $contracts]);
         } catch (ModelNotFoundException $e) {
             return redirect()->back()->with(['error' => 'Airport not found']);
+        }
+    }
+
+    public function toggleAcceptance(Request $request, AcceptContract $acceptContract): JsonResponse
+    {
+        if ($request->is_acceptance) {
+            $acceptContract->execute($request->contract_id, $request->user_id);
+            return response()->json(['message' => 'Contract successfully accepted']);
+        } else {
+            $acceptContract->execute($request->contract_id, null, false);
+            return response()->json(['message' => 'Contract successfully removed']);
         }
     }
 

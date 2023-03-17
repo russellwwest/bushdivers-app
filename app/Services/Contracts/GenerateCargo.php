@@ -15,7 +15,7 @@ class GenerateCargo
         $maxPax = 9;
         $types = CargoTypes::all();
         $cargo = $types->random();
-        if ($cargo->type == 1) {
+        if ($cargo->cargo_type == 1) {
             // random qty cargo
             $qty = rand($minCargo, $maxCargo);
         } else {

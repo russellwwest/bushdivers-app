@@ -17,4 +17,8 @@ describe('General helpers', () => {
     const amount = 200
     expect(displayNumber(amount)).toBe('200.00')
   })
+  it('displayNumber removes decimal if specified', () => {
+    const amount = 200.12
+    expect(displayNumber(amount, false)).toBe('200')
+  })
 })

@@ -51,13 +51,25 @@ export const AirportDetails = ({ airport }) => {
     const getMetar = async () => {
       try {
         const res = await axios.get(`/api/metar/${airport.identifier}`)
-        setMetar(res.data.metar.data[0])
-        const cl = renderClouds(res.data.metar.data[0])
-        setClouds(cl)
+        if (res.data.metar !== null) {
+          setMetar(res.data.metar.data[0])
+          const cl = renderClouds(res.data.metar.data[0])
+          setClouds(cl)
+        } else {
+          toast({
+            title: 'Error',
+            description: 'Error retrieving METAR',
+            status: 'error',
+            duration: 9000,
+            isClosable: true,
+            position: 'top'
+          })
+        }
       } catch (e) {
+        console.log(e)
         toast({
           title: 'Error',
-          description: e.response.data.message,
+          description: 'Error retrieving METAR',
           status: 'error',
           duration: 9000,
           isClosable: true,

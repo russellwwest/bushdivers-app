@@ -54,7 +54,7 @@ const Jumpseat = ({ user, spent }) => {
         setIsLoading.off()
         toast({
           title: 'Error',
-          description: e.response.data.message,
+          description: 'There was an issue processing the jumpseat',
           status: 'error',
           duration: 9000,
           isClosable: true,
