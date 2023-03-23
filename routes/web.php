@@ -30,4 +30,6 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/jumpseat', [\App\Http\Controllers\JumpseatController::class, 'performJumpseat']);
 
     Route::get('/airport/{icao?}', [\App\Http\Controllers\ContractController::class, 'index']);
+
+    Route::get('/fleet-aircraft', [\App\Http\Controllers\FleetController::class, 'index']);
 });

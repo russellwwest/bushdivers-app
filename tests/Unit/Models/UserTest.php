@@ -14,7 +14,7 @@ class UserTest extends TestCase
     /**
      * A basic unit test example.
      */
-    public function test__pilot_id_returned(): void
+    public function test_pilot_id_returned(): void
     {
         $user = User::create(['name' => 'John', 'email' => 'john@doe.com', 'password' => 'password']);
         $this->assertEquals('BDV0001', $user->pilot_id);
