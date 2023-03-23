@@ -1,4 +1,4 @@
-import { Box, Grid, GridItem, useColorMode, useColorModeValue } from '@chakra-ui/react'
+import { Box, Grid, GridItem, Image, useBoolean, useColorMode, useColorModeValue } from '@chakra-ui/react'
 import { useAtomValue, useSetAtom } from 'jotai'
 import PropTypes from 'prop-types'
 import React, { useEffect, useState } from 'react'
@@ -14,21 +14,26 @@ import maplibregl from 'maplibre-gl'
 import { parseMapStyle, mapboxToken, transformRequest } from '../../helpers/map.helper'
 import { mapStyleAtom } from '../../state/general.state'
 
-const Airport = ({ airport, contracts }) => {
+const Airport = ({ airport, contracts, aircraft }) => {
+  console.log(aircraft)
   const setSelectedContract = useSetAtom(selectedContractAtom)
   const mapStyle = useAtomValue(mapStyleAtom)
   const filterDistance = useAtomValue(distanceFilter)
   const filterPayload = useAtomValue(payloadFilter)
   const { colorMode } = useColorMode()
   const [filteredContracts, setFilteredContracts] = useState(contracts)
+  const [aircraftFlag, setAircraftFlag] = useBoolean(false)
 
   useEffect(() => {
     applyFilters()
   }, [filterPayload, filterDistance])
 
   function updateView (whatClicked) {
+    setAircraftFlag.off()
     // update to show/hide aircraft
-    console.log(whatClicked)
+    if (whatClicked === 'aircraft') {
+      setAircraftFlag.on()
+    }
   }
 
   const applyFilters = () => {
@@ -70,7 +75,6 @@ const Airport = ({ airport, contracts }) => {
         newContracts = distanceFilteredContracts
         break
     }
-    console.log(newContracts)
     setFilteredContracts(newContracts)
   }
 
@@ -88,7 +92,7 @@ const Airport = ({ airport, contracts }) => {
               <AirportHeader airport={airport} />
             </Box>
             <Box mt={4}>
-              <AirportContent airport={airport} contracts={filteredContracts} updateView={updateView} />
+              <AirportContent airport={airport} contracts={filteredContracts} updateView={updateView} aircraft={aircraft} />
             </Box>
           </Box>
         </GridItem>
@@ -115,6 +119,12 @@ const Airport = ({ airport, contracts }) => {
                 <AirportMarker icao={contract.arr_airport_id} color="orange" />
               </Marker>
             ))}
+            {/* Aircraft */}
+            {aircraftFlag && aircraft && aircraft.map((ac) => (
+              <Marker key={ac.id} longitude={ac.last_lon} latitude={ac.last_lat}>
+                <Image src="https://res.cloudinary.com/dji0yvkef/image/upload/v1631525263/BDVA/icon_c208_orangekFus_whiteWings_revnmm.png" alt="plane icon"/>
+              </Marker>
+            ))}
             <SelectedContractRoute />
             <ContractMapControls />
           </Map>
@@ -130,5 +140,6 @@ export default Airport
 
 Airport.propTypes = {
   airport: PropTypes.object,
-  contracts: PropTypes.array
+  contracts: PropTypes.array,
+  aircraft: PropTypes.array
 }

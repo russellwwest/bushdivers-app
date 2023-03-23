@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Aircraft;
 use App\Models\Airport;
 use App\Models\Contract;
 use App\Services\Contracts\AcceptContract;
@@ -26,6 +27,11 @@ class ContractController extends Controller
         try {
             // get airport info
             $airport = Airport::where('identifier', $icao)->firstOrFail();
+            // get aircraft
+            $aircraft = Aircraft::with('aircraftType', 'aircraftType.manufacturer')
+                ->whereIn('owner_id', [0, null])
+                ->orderBy('registration')
+                ->get();
 
             // generate contracts for airport
             $contracts = $this->getContracts($icao);
@@ -43,7 +49,7 @@ class ContractController extends Controller
             }
 
             // get aircraft
-            return Inertia::render('Airports/Airport', ['airport' => $airport, 'contracts' => $contracts]);
+            return Inertia::render('Airports/Airport', ['airport' => $airport, 'contracts' => $contracts, 'aircraft' => $aircraft]);
         } catch (ModelNotFoundException $e) {
             return redirect()->back()->with(['error' => 'Airport not found']);
         }

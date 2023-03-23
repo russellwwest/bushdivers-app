@@ -6,7 +6,7 @@ import { AircraftList } from './AircraftList'
 import { AirportDetails } from './AirportDetails'
 import { ContractList } from '../contracts/ContractList'
 
-export const AirportContent = ({ airport, contracts, updateView }) => {
+export const AirportContent = ({ airport, contracts, updateView, aircraft }) => {
   const { airportMap } = useMap()
 
   function handleTabClick (zoom, whatClicked) {
@@ -31,7 +31,7 @@ export const AirportContent = ({ airport, contracts, updateView }) => {
           <AirportDetails airport={airport} />
         </TabPanel>
         <TabPanel>
-          <AircraftList />
+          <AircraftList aircraft={aircraft} />
         </TabPanel>
       </TabPanels>
     </Tabs>
@@ -42,5 +42,6 @@ export const AirportContent = ({ airport, contracts, updateView }) => {
 AirportContent.propTypes = {
   airport: PropTypes.object,
   contracts: PropTypes.array,
-  updateView: PropTypes.func
+  updateView: PropTypes.func,
+  aircraft: PropTypes.array
 }
