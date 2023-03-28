@@ -15,7 +15,6 @@ import { parseMapStyle, mapboxToken, transformRequest } from '../../helpers/map.
 import { mapStyleAtom } from '../../state/general.state'
 
 const Airport = ({ airport, contracts, aircraft }) => {
-  console.log(aircraft)
   const setSelectedContract = useSetAtom(selectedContractAtom)
   const mapStyle = useAtomValue(mapStyleAtom)
   const filterDistance = useAtomValue(distanceFilter)

@@ -32,4 +32,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/airport/{icao?}', [\App\Http\Controllers\ContractController::class, 'index']);
 
     Route::get('/fleet-aircraft', [\App\Http\Controllers\FleetController::class, 'index']);
+
+    Route::get('/dispatch', [\App\Http\Controllers\DispatchController::class, 'index']);
 });
