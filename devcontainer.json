@@ -1,0 +1,19 @@
+// See https://aka.ms/vscode-remote/devcontainer.json for format details.
+{
+    "name": "codespaces-bushdivers",
+    "dockerComposeFile": ["docker-compose.yml"],
+    "shutdownAction": "stopCompose",
+    // Use 'forwardPorts' to make a list of ports inside the container available locally.
+    "forwardPorts": [8000, 3306],
+
+    // Use 'postCreateCommand' to run commands after the container is created.
+    "postCreateCommand": "cp .env.example .env && composer install && php artisan key:generate && php aritsan serve && npm install && npm run dev",
+    "portsAttributes": {
+        "8000": {
+            "label": "HTTP"
+        },
+        "3306": {
+            "label": "DB"
+        }
+    }
+}
